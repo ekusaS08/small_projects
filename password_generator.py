@@ -1,5 +1,5 @@
 #This was a coding challenge with my brother, that's the reason for using beginner concepts only.
-# in the hard Version it would have been easier to generate a password withg the easy version then use random.shuffle()
+# in the hard Version it would have been easier to generate a password with the easy version, convert it to a list then use random.shuffle()
 
 import  random
 
