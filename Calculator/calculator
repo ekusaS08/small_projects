@@ -1,0 +1,43 @@
+from art import logo
+
+
+#FUNCTIONS
+def add(n1, n2):
+    return n1 + n2
+
+
+def sub(n1, n2):
+    return n1 - n2
+
+
+def mult(n1, n2):
+    return n1 * n2
+
+
+def div(n1, n2):
+    return n1 / n2
+
+def calculate(n1,n2, op):
+    return operations[op](n1,n2)
+
+operations = {"+": add,
+              "-": sub,
+              "*": mult,
+              "/": div}
+
+#START
+print(logo)
+
+store_result = False
+
+while True:
+    if store_result:
+        first_nr = result
+    else:
+        first_nr = float(input("What is the first number?:\n"))
+    operation = input("Choose an Operation:\n '+'\n'-'\n'*'\n'/'\n ")
+    second_nr = float(input("Choose the second number:\n"))
+    result = calculate(first_nr,second_nr,operation)
+    print(f"{first_nr} {operation} {second_nr} = {result}")
+    store_result = input("Do you want to continue calculations with the result? (y)\n Or start a new calculation? (n)")== "y"
+
