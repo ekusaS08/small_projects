@@ -1,0 +1,44 @@
+from art import logo
+from random import randint
+
+
+#function
+def make_guess(act_num,rem_lives):
+    win = False
+    print(f"You have {rem_lives} attempts remaining to guess the number.")
+    guess = int(input("Make a guess: "))
+    if guess == act_num:
+        win = True
+        print(f"You got it! The answer was {act_num}.")
+    elif guess < act_num:
+        print("Too low.\nGuess again.")
+        rem_lives -= 1
+    elif guess > act_num:
+        print("Too High.\nGuess again.")
+        rem_lives -= 1
+    return rem_lives,win
+
+# main
+won = False
+lives = 10
+chosen_number = randint(1,100)
+
+
+print(logo)
+
+print("Welcome to the Number Guessing Game!\n"
+      "I'm thinking of a number between 1 and 100.")
+
+difficulty = input("Choose a difficulty. Type 'easy' or 'hard':  ").lower()
+
+if difficulty == "hard":
+    lives = 5
+
+while lives > 0 and not won:
+    lives , won = make_guess(chosen_number,lives)
+
+if lives == 0:
+    print(f"You've run out of guesses, you lose.\n The number was {chosen_number}")
+
+
+
