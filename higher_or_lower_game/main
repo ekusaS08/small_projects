@@ -1,0 +1,57 @@
+from random import randint
+
+from game_data import data
+from art import logo, vs
+
+vocals = ["a","e","i","o","u"]
+
+#functions
+def pick_person(persons):
+    person = persons[randint(0, len(persons)) - 1]
+    return person
+
+def describe_person(person):
+    a_or_an = "a"
+    if person["description"][0].lower() in vocals:
+        a_or_an = "an"
+    return f"{person["name"]},{a_or_an} {person["description"]}, from {person["country"]}."
+
+def check_choice(user_choice,person1,person2):
+    is_right = False
+    follower1 = person1["follower_count"]
+    follower2 = person2["follower_count"]
+    if user_choice == "a":
+        if  follower1 >= follower2:
+            is_right = True
+    else:
+        if follower2 >= follower1:
+            is_right = True
+    return is_right
+
+
+
+#main
+
+person_a = pick_person(data)
+person_b = pick_person(data)
+wrong = False
+score = 0
+
+while not wrong:
+    print(logo)
+    if score!=0:
+        print(f"You're right! Current score: {score}.")
+    print(f"Compare A: {describe_person(person_a)}")
+    print(vs)
+    print(f"Against B: {describe_person(person_b)}")
+    choice = input("Who has more followers? Type 'A' or 'B':   ").lower()
+    if check_choice(choice,person_a,person_b):
+        score+=1
+        person_a = person_b
+        person_b = pick_person(data)
+
+    else:
+        wrong = True
+    print(100*"\n")
+print(f"Sorry, that's wrong. Final score: {score}")
+
